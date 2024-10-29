@@ -22,16 +22,16 @@ pip install -r requirements.txt
 
 Asegúrate de tener una base de datos MySQL configurada y actualiza las configuraciones en `settings.py`:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nombre_base_datos',
-        'USER': 'tu_usuario',
-        'PASSWORD': 'tu_contraseña',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': 'nombre_base_datos',
+                'USER': 'tu_usuario',
+                'PASSWORD': 'tu_contraseña',
+                'HOST': 'localhost',
+                'PORT': '3306',
+            }
+        }
 
 # 5. Realiza las migraciones:
 
