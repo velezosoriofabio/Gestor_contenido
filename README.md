@@ -1,10 +1,10 @@
-# 1. Clonar el repositorio:
+### 1. Clonar el repositorio:
 
 git clone https://github.com/tu-usuario/nombre-del-repo.git
 
 cd nombre-del-repo
 
-# 2. Crea un entorno virtual (opcional pero recomendado):
+### 2. Crea un entorno virtual (opcional pero recomendado):
 
 python -m venv venv
 
@@ -14,11 +14,11 @@ Para activar el ambiente virtual en Windows, se usa
 
 venv\Scripts\activate
 
-# 3. Instalar las dependencias:
+### 3. Instalar las dependencias:
 
 pip install -r requirements.txt
 
-# 4. Configurar la base de datos:
+### 4. Configurar la base de datos:
 
 Asegúrate de tener una base de datos MySQL configurada y actualiza las configuraciones en `settings.py`:
 
@@ -33,11 +33,11 @@ Asegúrate de tener una base de datos MySQL configurada y actualiza las configur
             }
         }
 
-# 5. Realiza las migraciones:
+### 5. Realiza las migraciones:
 
 python manage.py migrate
 
 
-# 6. Ejecuta el servidor de desarrollo:
+### 6. Ejecuta el servidor de desarrollo:
 
 python manage.py runserver
