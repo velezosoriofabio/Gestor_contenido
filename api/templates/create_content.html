@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Contenido</title>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>  <!-- Importar CKEditor -->
+    <!-- <script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script> -->
+
+</head>
+<body>
+    <h1>Crear Contenido</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+    <script>
+        CKEDITOR.replace('id_body');  // Reemplazar el campo body con CKEditor
+    </script>
+</body>
+</html>
