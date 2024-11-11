@@ -1,20 +1,50 @@
-<!-- content_detail.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>{{ data.title.rendered }} .:.</title>
+    <title>{{ content.title }} - Detalle</title>
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f1f1f1; /* Gris claro */
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card-body {
+            padding: 2rem;
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>{{ content.rendered }}</h1>
-        <p>{{ content.body }}</p>
-        <small>Publicado el: {{ content.created_at }}</small>
-        <br>
-        <img src="{{ content.image.url }}" width="300">
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <img src="{{ content.image.url }}" class="card-img-top" alt="Imagen relacionada">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ content.title }}</h5>
+                        <h6 class="card-subtitle mb-2">Fecha: {{ content.date_created }}</h6>
+                        <p class="card-text"><strong>Estado:</strong> {{ content.status }}</p>
+                        <div class="container">
+                            {{ content.body|safe }}
+                        </div>
+                        <p class="card-text"><strong>Resumen:</strong> {{ content.excerpt }}</p>
+
+                        <!-- Botón para volver a la lista -->
+                        <a href="{% url 'content_list' %}" class="btn btn-secondary">Volver a la lista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

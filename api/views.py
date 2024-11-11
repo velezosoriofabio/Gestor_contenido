@@ -50,18 +50,10 @@ def render_json(request, id):
     return render(request, 'rendered_content.html', {'data': data})
     
 def content_detail(request,id):
+    # Recupera el contenido específico usando el ID
     content = get_object_or_404(Content, id=id)
-    # return render(request, 'content_detail.html', {'content': content})
-    # Renderiza el HTML completo
-    full_html = render(request, 'content_detail.html', {'content': content}).content
-    
-    # Utiliza BeautifulSoup para extraer solo el contenido del div container
-    soup = BeautifulSoup(full_html, 'html.parser')
-    container_div = soup.find('div', class_='container')
-    
-    # Retorna el HTML del div container
-    return HttpResponse(container_div)
-    # return render(request, 'content_detail.html', {'data': data})
+    return render(request, 'content_detail.html', {'content': content})
+
 
 # Create your views here.
 def create_content(request):
@@ -76,4 +68,5 @@ def create_content(request):
     return render(request, 'create_content.html', {'form': form})
 
 def content_list(request):
-    return render(request, 'content_list.html')
+    contents = Content.objects.all()
+    return render(request, 'content_list.html', {'contents': contents})
