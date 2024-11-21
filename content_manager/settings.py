@@ -32,8 +32,12 @@ SECRET_KEY = "django-insecure-)nw%r*a8(pv3w(g2j(ufgq#4w9!p^fr^*qvv1)^*q)k$@5!7+4
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if not DEBUG:
+    BASE_URL = 'https://hammahospital.com'
+else:
+    BASE_URL = 'http://localhost:8000'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'hammahospital.com']
 
 
 # Application definition
