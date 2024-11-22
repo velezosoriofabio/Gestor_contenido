@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import json
 from django.conf import settings
 
+
 def render_json(request, id):
     content = get_object_or_404(Content, id=id)
     # Renderiza el HTML completo
@@ -50,17 +51,22 @@ def content_detail(request,id):
     return render(request, 'content_detail.html', {'content': content})
 
 
-# Create your views here.
-def create_content(request):
-    if request.method == 'POST':
-        form = ContentForm(request.POST, request.FILES)  # Usar request.FILES para manejar imágenes
-        if form.is_valid():
-            form.save()  # Guarda el contenido en la base de datos
-            return redirect('content_list')  # Redirigir a una lista de contenidos o donde prefieras
+def create_content(request, id=None):
+    if id:
+        content = get_object_or_404(Content, id=id)
     else:
-        form = ContentForm()
-    
+        content = None 
+
+    # Si el formulario ha sido enviado (POST)
+    if request.method == 'POST':
+        form = ContentForm(request.POST, request.FILES, instance=content)  
+        if form.is_valid():
+            form.save() 
+            return redirect('content_detail', id=content.id if content else form.instance.id)  
+    else:
+        form = ContentForm(instance=content) 
     return render(request, 'create_content.html', {'form': form})
+
 
 def content_list(request):
     contents = Content.objects.all()
@@ -73,5 +79,18 @@ def listar_contenido(request):
     return render(request, 'listar_contenido.html', {'contenidos': contenidos})
 
 
-def index(request):
-    return render(request, 'home.html') 
+def home(request):
+    contenidos = Content.objects.all()
+    return render(request, 'home.html', {'contenidos': contenidos})
+
+def home2(request):
+    contenidos = Content.objects.all()
+    return render(request, 'home2.html', {'contenidos': contenidos})
+
+
+def delete_content(request, id):
+    content = get_object_or_404(Content, id=id)
+    if request.method == 'POST':
+        content.delete()
+        return redirect('content_list')  # Redirige a la lista de contenidos
+    return render(request, 'confirm_delete.html', {'content': content})  # Muestra la vista de confirmación

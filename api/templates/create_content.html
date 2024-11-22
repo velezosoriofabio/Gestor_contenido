@@ -2,20 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Contenido</title>
-    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>  <!-- Importar CKEditor -->
-    <!-- <script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script> -->
-
+    <title>{% if content %}Editar{% else %}Crear{% endif %} Contenido</title>
+    <script src="https://cdn.ckeditor.com/ckeditor4/4.16.0/standard/ckeditor.js"></script>
 </head>
+
+
+
 <body>
-    <h1>Crear Contenido</h1>
+    <h1>{% if content %}Editar{% else %}Crear{% endif %} Contenido</h1>
+    
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar</button>
+        <button type="submit">{% if content %}Guardar cambios{% else %}Guardar{% endif %}</button>
     </form>
+
     <script>
-        CKEDITOR.replace('id_body');  // Reemplazar el campo body con CKEditor
+        CKEDITOR.replace('id_body');  <!-- Aplica CKEditor solo al campo correspondiente -->
     </script>
 </body>
 </html>

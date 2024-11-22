@@ -31,16 +31,23 @@
                 <div class="card">
                     <img src="{{ content.image.url }}" class="card-img-top" alt="Imagen relacionada">
                     <div class="card-body">
-                        <h5 class="card-title">{{ content.title }}</h5>
-                        <h6 class="card-subtitle mb-2">Fecha: {{ content.date_created }}</h6>
-                        <p class="card-text"><strong>Estado:</strong> {{ content.status }}</p>
+                        <h5 class="card-title"> {{ content.title }}</h5>
+                        <p class="card-subtitle mb-2"><strong>Fecha:</strong> {{ content.created_at }}</p>
+                        <p class="card-text"><strong>Estado:</strong> Publicado</p>
                         <div class="container">
+                            <p class="card-text"><strong>Contenido:</strong></p>
                             {{ content.body|safe }}
                         </div>
-                        <p class="card-text"><strong>Resumen:</strong> {{ content.excerpt }}</p>
+                        <!-- <p class="card-text"><strong>Resumen:</strong> {{ content.body }}</p> -->
+
+                        <!-- Botón de editar -->
+                        <a href="{% url 'create_content' id=content.id %}" class="btn btn-primary">Editar</a>
+
+                        <!-- Formulario de eliminación -->
+                        <a href="{% url 'delete_content' id=content.id %}" class="btn btn-danger">Eliminar</a>
 
                         <!-- Botón para volver a la lista -->
-                        <a href="{% url 'content_list' %}" class="btn btn-secondary">Volver a la lista</a>
+                        <a href="javascript:history.back()" class="btn btn-secondary">Volver a la lista</a>
                     </div>
                 </div>
             </div>
