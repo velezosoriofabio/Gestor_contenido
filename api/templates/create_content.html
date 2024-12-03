@@ -1,24 +1,217 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>{% if content %}Editar{% else %}Crear{% endif %} Contenido</title>
-    <script src="https://cdn.ckeditor.com/ckeditor4/4.16.0/standard/ckeditor.js"></script>
-</head>
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="../assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Crear contenido</title>
 
-
-
-<body>
-    <h1>{% if content %}Editar{% else %}Crear{% endif %} Contenido</h1>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/offcanvas-navbar/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">{% if content %}Guardar cambios{% else %}Guardar{% endif %}</button>
-    </form>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .navbar-custom {
+        background-color: #d4fbfb; /* Cambia este color a lo que desees */
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #00bca3;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #00a3a3;
+        --bs-btn-hover-border-color: #00a3a3;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #00a3a3;
+        --bs-btn-active-border-color: #00a3a3;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+      .h1, h2, h3, h4, h5, h6 {
+        font-family:    'Geneva', Tahoma, sans-serif,system-ui;
+      }
+      .custom-bg {
+        background-color: #97e1e9; /* Un color claro, similar al que proporciona bg-body-tertiary */
+      }
+      .custom-color {
+        color: #093c71; /* Puedes usar cualquier código hexadecimal o nombre de color */
+      }
+      body {
+        padding-bottom: 50px; /* Ajusta el valor según lo necesites */
+      }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="offcanvas-navbar.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+  </head>
+
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-custom" aria-label="Main navigation">
+  <div class="container-fluid">
+    {% load static %}
+    <img class="d-block mx-auto mb-4" src="{% static '/images/logo-HAMA.png' %}" alt="Logo HAMA" width="300" height="120">
+    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+     
+    </div>
+  </div>
+</nav> -->
+  
+  
+
+  <body class="bg-body-tertiary">
+    <div class="container">
+      <main>
+        <div class="py-5 text-center">
+          {% load static %}
+          <img class="d-block mx-auto mb-4" src="{% static '/images/logo-HAMA.png' %}" alt="Logo HAMA" width="300" height="120">
+          <div class="p-2 custom-bg rounded">
+            <h2 class="display-5 link-body-emphasis mb-1"><strong>Crear contenido</strong></h2>
+            <p class="lead">Ingrese la información de apoyo para el cuidador.</p>  
+          </div>
+        </div>
+        <div class="row g-5">
+          <div class="col-md-8">
+            <form method="POST" enctype="multipart/form-data" action="{% url 'create_content' %}">
+              {% csrf_token %}
+              
+              <div class="mb-3">
+                <label for="title" class="form-label"><h3 class="mb-3"><strong>Título</strong></h3></label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Ingrese un título">
+              </div>
+              <div class="mb-3">
+                <label for="body" class="form-label"><h3 class="mb-3"><strong>Descripción</strong></h3></label>
+                <textarea class="form-control" id="body" name="body" rows="3" placeholder="Ingrese una descripción"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label"><h3 class="mb-3"><strong>Imagen</strong></h3></label>
+                <input type="file" class="form-control" id="image" name="image">
+              </div>
+              <button class="w-100 btn btn-bd-primary" type="submit">Guardar</button>
+            </form>
+          </div>
+          <div class="col-md-4">
+            <h4 class="custom-color"><strong>Previsualizar</strong></h4>
+            <div style="border: 1px solid #00bca3; padding: 20px; border-radius: 10px;">
+              <img id="preview-image" src="#" alt="Previsualización de la imagen" style="max-width: 100%; height: auto; display: none;">
+              <h3 id="preview-title">Ingrese título</h3>
+              <p id="preview-body">Acá se verá la descripción</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
 
     <script>
-        CKEDITOR.replace('id_body');  <!-- Aplica CKEditor solo al campo correspondiente -->
+      CKEDITOR.replace('body');
+      const titleInput = document.getElementById('title');
+      const bodyInput = document.getElementById('body');
+      const imageInput = document.getElementById('image');
+      const previewTitle = document.getElementById('preview-title');
+      const previewBody = document.getElementById('preview-body');
+      const previewImage = document.getElementById('preview-image');
+
+      // Actualizar título
+      titleInput.addEventListener('input', () => {
+        previewTitle.textContent = titleInput.value || 'Título aquí';
+      });
+
+      // Actualizar descripción
+      CKEDITOR.instances.body.on('change', function () {
+        previewBody.innerHTML = CKEDITOR.instances.body.getData() || 'Ingrese descripción';
+      });
+
+      // Actualizar imagen
+      imageInput.addEventListener('change', () => {
+        const file = imageInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        } else {
+          previewImage.src = '#';
+          previewImage.style.display = 'none';
+        }
+      });
     </script>
-</body>
+
+
+  </body>
 </html>

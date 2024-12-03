@@ -1,7 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-# Create your models here.
 class Content(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)

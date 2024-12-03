@@ -51,22 +51,16 @@ def content_detail(request,id):
     return render(request, 'content_detail.html', {'content': content})
 
 
-def create_content(request, id=None):
-    if id:
-        content = get_object_or_404(Content, id=id)
-    else:
-        content = None 
-
-    # Si el formulario ha sido enviado (POST)
+def create_content(request):
     if request.method == 'POST':
-        form = ContentForm(request.POST, request.FILES, instance=content)  
+        form = ContentForm(request.POST, request.FILES)  # Usar request.FILES para manejar imágenes
         if form.is_valid():
-            form.save() 
-            return redirect('content_detail', id=content.id if content else form.instance.id)  
+            form.save()  # Guarda el contenido en la base de datos
+            return redirect('content_list')  # Redirigir a una lista de contenidos o donde prefieras
     else:
-        form = ContentForm(instance=content) 
+        form = ContentForm()
+    
     return render(request, 'create_content.html', {'form': form})
-
 
 def content_list(request):
     contents = Content.objects.all()
