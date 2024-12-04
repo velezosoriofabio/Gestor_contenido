@@ -90,9 +90,9 @@ WSGI_APPLICATION = "content_manager.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "mi_base_datos",
-        "USER": "root",
-        "PASSWORD" : "campeon207",
+        "NAME": "",
+        "USER": "",
+        "PASSWORD" : "",
         "PORT":"3306",
         "HOST":"localhost"
     }
